@@ -73,7 +73,7 @@ const Mintpage = () => {
                     navbarScroll
                   >
                     <Nav.Link className='navsunelected navmr' href="/">HOME</Nav.Link>
-                    <Nav.Link className='navselected navml' href="/about">ABOUT</Nav.Link>
+                    <Nav.Link className='navselected navml' href="/#/about">ABOUT</Nav.Link>
                   </Nav>
                   <button className='btn' onClick={handleConnect}>
                     {walletAddress.length > 0 ? (
