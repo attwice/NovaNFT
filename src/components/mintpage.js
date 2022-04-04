@@ -176,7 +176,7 @@ const Mintpage = () => {
           <div className="home-navbar container">
             <Navbar expand="lg" className='w-100'>
               <Container fluid>
-                <Navbar.Brand href="/home">
+                <Navbar.Brand href="/">
                   <img className="logo" src={logoimg} alt='' />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -187,7 +187,7 @@ const Mintpage = () => {
                     navbarScroll
                   >
                     <Nav.Link className='navselected navmr' href="/">HOME</Nav.Link>
-                    <Nav.Link className='navsunelected navml' href="/about">ABOUT</Nav.Link>
+                    <Nav.Link className='navsunelected navml' href="/#/about">ABOUT</Nav.Link>
                   </Nav>
                   {/* <Form> */}
                     <button className='btn' onClick={handleConnect}>
