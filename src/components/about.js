@@ -55,7 +55,7 @@ const Mintpage = () => {
   }, []);
 
   return (
-    <div id='home' className="homepage position-relative" style={{ height: '100vh' }}>
+    <div id='/' className="homepage position-relative" style={{ height: '100vh' }}>
       <img className="bg-image" src={background} alt="" />
       <div className="content">
         <div className="mask">
@@ -72,7 +72,7 @@ const Mintpage = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                   >
-                    <Nav.Link className='navsunelected navmr' href="/home">HOME</Nav.Link>
+                    <Nav.Link className='navsunelected navmr' href="/">HOME</Nav.Link>
                     <Nav.Link className='navselected navml' href="/about">ABOUT</Nav.Link>
                   </Nav>
                   <button className='btn' onClick={handleConnect}>

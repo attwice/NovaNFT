@@ -11,7 +11,7 @@ function App() {
       {/* <Mintpage /> */}
       {/* <Aboutpage /> */}
       <Routes>
-        <Route exact path="/home" element={<Mintpage />} />
+        <Route exact path="/" element={<Mintpage />} />
         <Route exact path="/about" element={<Aboutpage />} />
       </Routes>
     </Router>
