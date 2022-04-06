@@ -21,7 +21,7 @@ import scrollimg from '../img/alltubbies.dac0edcd.png';
 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contractABI = require("../nona.json");
-const contractAddress = "0xEFb25C945D20ae4fc92Ecb36d5de1272DE6315D0";
+const contractAddress = "0x737f5BA8A17BB4d945557898dD9822a50A607a37";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const contract = new web3.eth.Contract(contractABI, contractAddress);
@@ -44,7 +44,7 @@ const mintNFT = async (amount, price, state) => {
     //       console.log(error);
     //     });
     // } else {
-      contract.methods.publicsaleKangaroo(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+      contract.methods.publicsaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
