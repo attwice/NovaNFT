@@ -20,8 +20,8 @@ import novalogo from '../img/logo.png';
 import scrollimg from '../img/alltubbies.dac0edcd.png';
 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
-const contractABI = require("../kangaroo.json");
-const contractAddress = "0xC4dDc55DDA525Abb97B7A09667Ed11577A374824";
+const contractABI = require("../nona.json");
+const contractAddress = "0x0bf0B05ABc79a19Bb06512eb046450D42e35656d";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const contract = new web3.eth.Contract(contractABI, contractAddress);
@@ -35,16 +35,16 @@ const mintNFT = async (amount, price, state) => {
     }
   }
   else {
-    const _amountOfEther = web3.utils.toWei(web3.utils.toBN(price), 'ether') * web3.utils.toBN(amount) / web3.utils.toBN(100);
+    const _amountOfEther = web3.utils.toWei(web3.utils.toBN(price), 'ether') * web3.utils.toBN(amount) / web3.utils.toBN(1000);
     if (state === true) {
-      contract.methods.presaleKangaroo(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+      contract.methods.presaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
           console.log(error);
         });
     } else {
-      contract.methods.publicsaleKangaroo(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+      contract.methods.publicsaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
@@ -65,10 +65,10 @@ const Mintpage = () => {
   const [tokenNumber, setTokenNumber] = useState(1);
   const [supply, setSupply] = useState(0);
   // const [presaleState, setPresaleState] = useState(false);
-  const presaleState = false;
-  const tokenPrice1 = 3;
-  const tokenPrice2 = 4;
-  const tokenPrice3 = 5;
+  const presaleState = true;
+  const tokenPrice1 = 123;
+  const tokenPrice2 = 123;
+  const tokenPrice3 = 123;
 
   const decreaseTokenNumber = () => {
     if (tokenNumber === 1) {
@@ -96,26 +96,6 @@ const Mintpage = () => {
     }
   }
 
-  // let year = new Date().getFullYear();
-  // const difference = +new Date(`5 January ${year} 09:00:00 UTC`) - +new Date(); 
-
-  // let initialDays = 0;
-  // let initialHours = 0; 
-  // let initialMinutes = 0;
-  // let initialSeconds = 0;
-
-  // if (difference > 0) {
-  //   initialDays = Math.floor(difference / (1000 * 60 * 60 * 24));              
-  //   initialHours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-  //   initialMinutes = Math.floor((difference / 1000 / 60) % 60);
-  //   initialSeconds = Math.floor((difference / 1000) % 60);      
-  // } 
-
-  // const [ day, setDays ] = useState(initialDays);
-  // const [ hour, setHours ] = useState(initialHours);
-  // const [ minute, setMinutes ] = useState(initialMinutes);
-  // const [ second, setSeconds ] =  useState(initialSeconds); 
-
   useEffect(() => {
     WebFont.load({
       google: {
@@ -132,41 +112,6 @@ const Mintpage = () => {
     }
     fetchData();
   }, []);
-
-  // useEffect(() => {    
-  //   let myInterval = setInterval(() => {
-  //     if (second > 0) {
-  //       setSeconds(second - 1);
-  //     }
-
-  //     if (second === 0) {
-  //       if (minute === 0) {
-  //         if(hour === 0) {
-  //           if(day === 0) {    
-  //             setPresaleState(false);              
-  //             clearInterval(myInterval);              
-  //           } else {
-  //             setDays(day - 1);
-  //             setHours(23);
-  //             setMinutes(59);
-  //             setSeconds(59);
-  //           }            
-  //         } else {
-  //           setHours(hour - 1);
-  //           setMinutes(59);
-  //           setSeconds(59);
-  //         }
-  //       } else {
-  //         setMinutes(minute - 1);
-  //         setSeconds(59);
-  //       }
-  //     } 
-  //   }, 1000)
-
-  //   return ()=> {
-  //     clearInterval(myInterval);
-  //   };
-  // });
 
   return (
     <div id='/' className="homepage position-relative" style={{ height: '100vh' }}>
@@ -190,23 +135,23 @@ const Mintpage = () => {
                     <Nav.Link className='navsunelected navml' href="/#/about">ABOUT</Nav.Link>
                   </Nav>
                   {/* <Form> */}
-                    <button className='btn' onClick={handleConnect}>
-                      {walletAddress.length > 0 ? (
-                        "" +
-                        String(walletAddress).substring(0, 6) +
-                        "..." +
-                        String(walletAddress).substring(38)
-                      ) : (
-                        <span>CONNECT</span>
-                      )
-                      }
-                    </button>
-                    <a href='https://discord.com/invite/tubbycatsnft'>
-                      <img className='link-icon mx-2' src={discord} alt='icon' />
-                    </a>
-                    <a href='https://twitter.com/tubbycatsnft'>
-                      <img className='link-icon mx-2' src={twitter} alt='icon' />
-                    </a>
+                  <button className='btn' onClick={handleConnect}>
+                    {walletAddress.length > 0 ? (
+                      "" +
+                      String(walletAddress).substring(0, 6) +
+                      "..." +
+                      String(walletAddress).substring(38)
+                    ) : (
+                      <span>CONNECT</span>
+                    )
+                    }
+                  </button>
+                  <a href='https://discord.com/invite/tubbycatsnft'>
+                    <img className='link-icon mx-2' src={discord} alt='icon' />
+                  </a>
+                  <a href='https://twitter.com/tubbycatsnft'>
+                    <img className='link-icon mx-2' src={twitter} alt='icon' />
+                  </a>
                   {/* </Form> */}
                 </Navbar.Collapse>
               </Container>
@@ -242,23 +187,21 @@ const Mintpage = () => {
                   ]}
             </div>
           </div>
-          {presaleState ? <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 100} ETH</h4> : [tokenNumber <= 5 ?
-            <h4 className="pb-4">Total {tokenPrice3 * tokenNumber / 100} ETH</h4> : [tokenNumber <= 10 ?
-              <h4 className="pb-4">Total {tokenPrice2 * tokenNumber / 100} ETH</h4> : <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 100} ETH</h4>]]
+          {presaleState ? <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 1000} ETH</h4> : [tokenNumber <= 3 ?
+            <h4 className="pb-4">Total {tokenPrice3 * tokenNumber / 1000} ETH</h4> : [tokenNumber <= 3 ?
+              <h4 className="pb-4">Total {tokenPrice2 * tokenNumber / 1000} ETH</h4> : <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 1000} ETH</h4>]]
           }
           {
             presaleState ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice1, presaleState) }}>Mint</button> : [
-              tokenNumber <= 5 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice3, presaleState) }}>Mint</button> : [
-                tokenNumber <= 10 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice2, presaleState) }}>Mint</button> :
+              tokenNumber <= 3 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice3, presaleState) }}>Mint</button> : [
+                tokenNumber <= 3 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice2, presaleState) }}>Mint</button> :
                   <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice1, presaleState) }}>Mint</button>
               ]
             ]
           }
           <div className='scrollbar'>
-            <img src={scrollimg}  className='tubby-scroll' alt=''/>
-            </div>
-          
-          {/* <button className="btn-mint" disabled onClick={() => {mintNFT(tokenNumber, tokenPrice1)}}>Mint</button>            */}
+            <img src={scrollimg} className='tubby-scroll' alt='' />
+          </div>
         </div>
       </div>
     </div>
