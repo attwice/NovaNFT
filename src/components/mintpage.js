@@ -37,14 +37,14 @@ const mintNFT = async (amount, price, state) => {
   else {
     const _amountOfEther = web3.utils.toWei(web3.utils.toBN(price), 'ether') * web3.utils.toBN(amount) / web3.utils.toBN(1000);
     if (state === true) {
-      contract.methods.presaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+      contract.methods.presaleNona(amount).send({ from: address, gas: 500000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
           console.log(error);
         });
     } else {
-      contract.methods.publicsaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+      contract.methods.publicsaleNona(amount).send({ from: address, gas: 500000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
