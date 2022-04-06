@@ -21,7 +21,7 @@ import scrollimg from '../img/alltubbies.dac0edcd.png';
 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contractABI = require("../nona.json");
-const contractAddress = "0x0bf0B05ABc79a19Bb06512eb046450D42e35656d";
+const contractAddress = "0xA1e673D16F030032Ed627704e49624f7Bb1d0302";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const contract = new web3.eth.Contract(contractABI, contractAddress);
@@ -37,14 +37,14 @@ const mintNFT = async (amount, price, state) => {
   else {
     const _amountOfEther = web3.utils.toWei(web3.utils.toBN(price), 'ether') * web3.utils.toBN(amount) / web3.utils.toBN(1000);
     if (state === true) {
-      contract.methods.presaleNona(amount).send({ from: address, gas: 1500000 * amount, value: _amountOfEther })
+      contract.methods.presaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
           console.log(error);
         });
     } else {
-      contract.methods.publicsaleNona(amount).send({ from: address, gas: 1500000 * amount, value: _amountOfEther })
+      contract.methods.publicsaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
@@ -65,7 +65,7 @@ const Mintpage = () => {
   const [tokenNumber, setTokenNumber] = useState(1);
   const [supply, setSupply] = useState(0);
   // const [presaleState, setPresaleState] = useState(false);
-  const presaleState = true;
+  const presaleState = false;
   const tokenPrice1 = 123;
   const tokenPrice2 = 123;
   const tokenPrice3 = 123;
