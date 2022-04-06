@@ -21,7 +21,7 @@ import scrollimg from '../img/alltubbies.dac0edcd.png';
 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contractABI = require("../nona.json");
-const contractAddress = "0xA1e673D16F030032Ed627704e49624f7Bb1d0302";
+const contractAddress = "0xEFb25C945D20ae4fc92Ecb36d5de1272DE6315D0";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 const contract = new web3.eth.Contract(contractABI, contractAddress);
@@ -37,14 +37,14 @@ const mintNFT = async (amount, price, state) => {
   else {
     const _amountOfEther = web3.utils.toWei(web3.utils.toBN(price), 'ether') * web3.utils.toBN(amount) / web3.utils.toBN(1000);
     if (state === true) {
-      contract.methods.presaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
-        .on("confirmation", function () {
-        })
-        .on('error', async function (error, receipt) {
-          console.log(error);
-        });
-    } else {
-      contract.methods.publicsaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+    //   contract.methods.presaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
+    //     .on("confirmation", function () {
+    //     })
+    //     .on('error', async function (error, receipt) {
+    //       console.log(error);
+    //     });
+    // } else {
+      contract.methods.publicsaleKangaroo(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
         .on('error', async function (error, receipt) {
@@ -64,8 +64,8 @@ const Mintpage = () => {
   // const [status, setStatus] = useState(""); 
   const [tokenNumber, setTokenNumber] = useState(1);
   const [supply, setSupply] = useState(0);
-  // const [presaleState, setPresaleState] = useState(false);
-  const presaleState = false;
+  // const [publicsaleState, setpublicsaleState] = useState(false);
+  const publicsaleState = true;
   const tokenPrice1 = 123;
   const tokenPrice2 = 123;
   const tokenPrice3 = 123;
@@ -180,22 +180,22 @@ const Mintpage = () => {
               <img src={minus} alt="" onClick={decreaseTokenNumber} />
               <div className="amount">{tokenNumber}</div>
               {
-                presaleState ? [tokenNumber < 3 ? <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber + 1)} /> :
+                publicsaleState ? [tokenNumber < 3 ? <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber + 1)} /> :
                   <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber)} />] :
                   [tokenNumber < 3 ? <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber + 1)} /> :
                     <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber)} />
                   ]}
             </div>
           </div>
-          {presaleState ? <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 1000} ETH</h4> : [tokenNumber <= 3 ?
+          {publicsaleState ? <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 1000} ETH</h4> : [tokenNumber <= 3 ?
             <h4 className="pb-4">Total {tokenPrice3 * tokenNumber / 1000} ETH</h4> : [tokenNumber <= 3 ?
               <h4 className="pb-4">Total {tokenPrice2 * tokenNumber / 1000} ETH</h4> : <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 1000} ETH</h4>]]
           }
           {
-            presaleState ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice1, presaleState) }}>Mint</button> : [
-              tokenNumber <= 3 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice3, presaleState) }}>Mint</button> : [
-                tokenNumber <= 3 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice2, presaleState) }}>Mint</button> :
-                  <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice1, presaleState) }}>Mint</button>
+            publicsaleState ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice1, publicsaleState) }}>Mint</button> : [
+              tokenNumber <= 3 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice3, publicsaleState) }}>Mint</button> : [
+                tokenNumber <= 3 ? <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice2, publicsaleState) }}>Mint</button> :
+                  <button className="opensea-btn" onClick={() => { mintNFT(tokenNumber, tokenPrice1, publicsaleState) }}>Mint</button>
               ]
             ]
           }
