@@ -37,13 +37,6 @@ const mintNFT = async (amount, price, state) => {
   else {
     const _amountOfEther = web3.utils.toWei(web3.utils.toBN(price), 'ether') * web3.utils.toBN(amount) / web3.utils.toBN(1000);
     if (state === true) {
-    //   contract.methods.presaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
-    //     .on("confirmation", function () {
-    //     })
-    //     .on('error', async function (error, receipt) {
-    //       console.log(error);
-    //     });
-    // } else {
       contract.methods.publicsaleNona(amount).send({ from: address, gas: 150000 * amount, value: _amountOfEther })
         .on("confirmation", function () {
         })
@@ -164,7 +157,7 @@ const Mintpage = () => {
           <div className="d-flex justify-content-center pt-3">
             <img className='novalogo' src={novalogo} alt="" />
           </div>
-          <h3 className='mt-4 mb-3'>300 NFTS ON THE ETHEREUM BLOCKCHAIN.</h3>
+          <h3 className='mt-4 mb-3'>380 NFTS ON THE ETHEREUM BLOCKCHAIN.</h3>
           <div className='d-flex justify-content-center'>
             <a href='https://opensea.io/collection/tubby-cats'>
               <button className='opensea-btn mx-4'>OPENSEA</button>
@@ -184,7 +177,8 @@ const Mintpage = () => {
                   <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber)} />] :
                   [tokenNumber < 3 ? <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber + 1)} /> :
                     <img src={plus} alt="" onClick={() => setTokenNumber(tokenNumber)} />
-                  ]}
+                  ]
+              }
             </div>
           </div>
           {publicsaleState ? <h4 className="pb-4">Total {tokenPrice1 * tokenNumber / 1000} ETH</h4> : [tokenNumber <= 3 ?
